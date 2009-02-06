@@ -1,0 +1,20 @@
+# RubyGems Environment #
+
+  - RUBYGEMS VERSION: <%= ::Gem::RubyGemsVersion %>
+  - RUBY VERSION: <%= RUBY_VERSION %> (<%= RUBY_RELEASE_DATE %> patchlevel <%= defined?(RUBY_PATCHLEVEL) ? RUBY_PATCHLEVEL : 'none' %>) [<%= RUBY_PLATFORM %>]
+  - INSTALLATION DIRECTORY: <%= ::Gem.dir %>
+  - RUBYGEMS PREFIX: <%= ::Gem.prefix %>
+  - RUBY EXECUTABLE: <%= ::Gem.ruby %>
+  - EXECUTABLE DIRECTORY: <%= ::Gem.bindir %>
+  - RUBYGEMS PLATFORMS:
+  <% ::Gem.platforms.each do |platform| %>  - <%= platform %>
+  <% end %>
+  - GEM PATHS:
+  <% ::Gem.path.each do |path| %>  - <%= path %>
+  <% end %>
+  - GEM CONFIGURATION:
+  <% ::Gem.configuration.each do |name, value| %>  - <%= name.inspect %> => <%= value.inspect %>
+  <% end %>
+  - REMOTE SOURCES:
+  <% ::Gem.sources.each do |s| %>  - <%= s %>
+  <% end %>

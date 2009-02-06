@@ -44,6 +44,16 @@ module Busted
       target
     end
 
+    def gem_info_file
+      template_file = File.join(BASEDIR, 'templates', 'gem_info.erb')
+      template = ERB.new(File.read(template_file))
+      target = File.join(Dir::tmpdir, 'gem_info.txt')
+      File.open(target, 'wb') { |f|
+        f.write template.result(binding)
+      }
+      target
+    end
+
     private
     def copy_gem
       dirname = File.join(Dir::tmpdir, File.basename(@gemspec.full_gem_path))

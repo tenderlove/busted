@@ -23,5 +23,13 @@ module Busted
       assert_match Dir::tmpdir, filename
       assert File.exists?(filename)
     end
+
+    def test_ruby_info
+      broken = Busted::Gem.new(@spec)
+      filename = broken.ruby_info_file
+      assert_match Dir::tmpdir, filename
+      assert File.exists?(filename)
+      assert_match /txt$/, filename
+    end
   end
 end

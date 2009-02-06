@@ -1,4 +1,5 @@
 require 'tempfile'
+require 'erb'
 
 module Busted
   class Gem
@@ -31,6 +32,16 @@ module Busted
           return File.join(Dir::tmpdir, "#{archive_prefix}.zip")
         end
       end
+    end
+
+    def ruby_info_file
+      template_file = File.join(BASEDIR, 'templates', 'ruby_info.erb')
+      template = ERB.new(File.read(template_file))
+      target = File.join(Dir::tmpdir, 'ruby_info.txt')
+      File.open(target, 'wb') { |f|
+        f.write template.result(binding)
+      }
+      target
     end
 
     private

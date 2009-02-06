@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'tempfile'
 require 'busted'
 
 module Busted

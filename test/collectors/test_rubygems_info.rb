@@ -2,11 +2,11 @@ require 'helper'
 
 module Busted
   module Collectors
-    class TestGemInfo < TestCase
+    class TestRubygemsInfo < TestCase
       def setup
         @scratch_dir = File.join(Dir.tmpdir, $$.to_s)
         FileUtils.mkdir_p @scratch_dir
-        @gi = GemInfo.new @scratch_dir
+        @gi = RubygemsInfo.new @scratch_dir
       end
 
       def test_writes_to_scratch_dir

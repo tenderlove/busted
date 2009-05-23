@@ -16,13 +16,5 @@ module Busted
       assert broken_gem
       assert broken_gem.version
     end
-
-    def test_archive_file
-      broken = Busted::Gem.new(@spec)
-      filename = broken.archive_file
-      assert_match Dir::tmpdir, filename
-      assert File.exists?(filename)
-    end
-
   end
 end

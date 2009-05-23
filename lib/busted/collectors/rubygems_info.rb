@@ -1,6 +1,6 @@
 module Busted
   module Collectors
-    class GemInfo < Collector
+    class RubygemsInfo < Collector
       def process gemspec = nil
         template_file = File.join(BASEDIR, 'templates', 'gem_info.erb')
         template = ERB.new(File.read(template_file))

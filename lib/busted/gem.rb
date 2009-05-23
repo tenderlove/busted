@@ -20,7 +20,7 @@ module Busted
       @gemspec = gemspec
       @tarcommand = 'tar'
       @zipcommand = 'zip'
-      @scratch_dir = File.join(Dir.tmpdir, $$.to_s)
+      @scratch_dir = File.join(Dir.tmpdir, Time.now.to_i.to_s)
       FileUtils.mkdir_p(@scratch_dir)
       Dir.chdir @scratch_dir
     end
@@ -49,11 +49,7 @@ module Busted
 
     private
     def copy_gem
-      dirname = File.join(Dir::tmpdir, File.basename(@gemspec.full_gem_path))
-      FileUtils.rm_rf(dirname)
-      FileUtils.mkdir_p(dirname)
-      FileUtils.cp_r(@gemspec.full_gem_path, dirname)
-      dirname
+      Collectors::GemArchiver.new(@scratch_dir).process(@gemspec)
     end
   end
 end

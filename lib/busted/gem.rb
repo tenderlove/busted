@@ -1,4 +1,6 @@
 require 'tempfile'
+require 'fileutils'
+require 'rbconfig'
 require 'erb'
 
 module Busted
@@ -18,6 +20,9 @@ module Busted
       @gemspec = gemspec
       @tarcommand = 'tar'
       @zipcommand = 'zip'
+      @scratch_dir = File.join(Dir.tmpdir, $$.to_s)
+      FileUtils.mkdir_p(@scratch_dir)
+      Dir.chdir @scratch_dir
     end
 
     def archive_file
@@ -35,23 +40,11 @@ module Busted
     end
 
     def ruby_info_file
-      template_file = File.join(BASEDIR, 'templates', 'ruby_info.erb')
-      template = ERB.new(File.read(template_file))
-      target = File.join(Dir::tmpdir, 'ruby_info.txt')
-      File.open(target, 'wb') { |f|
-        f.write template.result(binding)
-      }
-      target
+      Collectors::RubyInfo.new(@scratch_dir).process(@gemspec)
     end
 
     def gem_info_file
-      template_file = File.join(BASEDIR, 'templates', 'gem_info.erb')
-      template = ERB.new(File.read(template_file))
-      target = File.join(Dir::tmpdir, 'gem_info.txt')
-      File.open(target, 'wb') { |f|
-        f.write template.result(binding)
-      }
-      target
+      Collectors::GemInfo.new(@scratch_dir).process(@gemspec)
     end
 
     private

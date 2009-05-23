@@ -1,6 +1,7 @@
 require 'test/unit'
 require 'tempfile'
 require 'busted'
+require 'rubygems'
 
 module Busted
   class TestCase < Test::Unit::TestCase

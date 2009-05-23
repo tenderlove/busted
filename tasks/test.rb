@@ -1,5 +1,5 @@
 Rake::TestTask.new do |t|
-  %w[ lib ].each do |dir|
+  %w[ lib test ].each do |dir|
     t.libs << dir
   end
 
